@@ -1,13 +1,22 @@
 import React from 'react';
-import { DeleteButton, TodoItem } from '../styles/AppStyle';
+import { Button, Container, TodoInfo } from '../styles/ListItemStyle';
 
 const ListItem = ({ todo, deleteTodo, toggleTodo }) => {
+  console.log('ListItem');
   return (
-    <TodoItem completed={todo.completed}>
-      <input type="checkbox" defaultChecked={todo.completed} onChange={() => toggleTodo(todo.id)} />
-      {todo.title}
-      <DeleteButton onClick={() => deleteTodo(todo.id)}>X</DeleteButton>
-    </TodoItem>
+    <Container>
+      <TodoInfo completed={todo.completed}>
+        <input
+          type="checkbox"
+          defaultChecked={todo.completed}
+          onChange={() => toggleTodo(todo.id)}
+        />
+        {todo.title}
+      </TodoInfo>
+      <div className="items-center">
+        <Button onClick={() => deleteTodo(todo.id)}>Delete</Button>
+      </div>
+    </Container>
   );
 };
 

@@ -1,39 +1,11 @@
-import styled from '@emotion/styled';
+import tw from 'twin.macro';
 
-const TodoBlock = styled.div`
-  padding: 30px;
-  margin-top: 50px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: -9px 17px 13px rgb(0 0 0 / 16%);
-`;
+const Screen = tw.div`flex items-center justify-center w-screen h-screen bg-blue-300`;
 
-const TodoItem = styled.div`
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-  text-decoration: ${props => (props.completed ? 'line-through' : 'none')};
-`;
+const Container = tw.div`w-4/5 p-6 bg-white rounded-[6px] shadow`;
 
-const DeleteButton = styled.button`
-  color: #fff;
-  float: right;
-  border: none;
-  padding: 5px 9px;
-  border-radius: 50%;
-  cursor: pointer;
-`;
+const TitleBar = tw.div`flex justify-between mb-3`;
 
-const TodoForm = styled.form`
-  display: flex;
-`;
+const Title = tw.h1`text-center w-full text-2xl text-red-600 font-semibold`;
 
-const TodoInput = styled.input`
-  flex: 10;
-  padding: 5px;
-`;
-
-const TodoSubmit = styled.input`
-  flex: 1;
-`;
-
-export { TodoBlock, TodoItem, DeleteButton, TodoForm, TodoInput, TodoSubmit };
+export { Screen, Container, TitleBar, Title };

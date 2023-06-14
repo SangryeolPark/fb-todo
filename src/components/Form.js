@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TodoForm, TodoInput, TodoSubmit } from '../styles/AppStyle';
+import { Container, Input, Submit } from '../styles/FormStyle';
 
 const Form = ({ todoData, setTodoData }) => {
   const [value, setValue] = useState('');
@@ -17,16 +17,16 @@ const Form = ({ todoData, setTodoData }) => {
   };
 
   return (
-    <TodoForm>
-      <TodoInput
+    <Container onSubmit={addTodo}>
+      <Input
         type="text"
         name="value"
         placeholder="할 일을 입력해주세요."
         value={value}
         onChange={e => setValue(e.target.value)}
       />
-      <TodoSubmit type="submit" value="입력" onClick={addTodo} />
-    </TodoForm>
+      <Submit type="submit" value="입력" />
+    </Container>
   );
 };
 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TodoBlock } from './styles/AppStyle';
+import { Container, Screen, Title, TitleBar } from './styles/AppStyle';
 import List from './components/List';
 import Form from './components/Form';
 
@@ -12,13 +12,15 @@ function App() {
   ]);
 
   return (
-    <div style={{ margin: 'auto', maxWidth: '960px' }}>
-      <TodoBlock>
-        <h1>할 일 목록</h1>
+    <Screen>
+      <Container>
+        <TitleBar>
+          <Title>Firebase Todo List</Title>
+        </TitleBar>
         <List todoData={todoData} setTodoData={setTodoData} />
         <Form todoData={todoData} setTodoData={setTodoData} />
-      </TodoBlock>
-    </div>
+      </Container>
+    </Screen>
   );
 }
 
