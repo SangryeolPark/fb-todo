@@ -12,6 +12,12 @@ const Form = ({ todoData, setTodoData }) => {
     };
 
     e.preventDefault();
+
+    if (value.trim() === '') {
+      alert('내용을 입력하세요.');
+      return;
+    }
+
     setTodoData([...todoData, newTodo]);
     setValue('');
   };
