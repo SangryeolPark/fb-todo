@@ -15,13 +15,27 @@ const Register = () => {
     try {
       // firebase에 회원가입 하기
       let createUser = await firebase.auth().createUserWithEmailAndPassword(email, password);
-      await createUser.user.updateProfile({
-        name: nickname,
+      // 회원 가입 성공
+      createUser.user.updateProfile({
+        displayName: nickname,
       });
-      console.log(createUser.user);
       navigate('/login');
     } catch (err) {
-      console.error(err);
+      console.error(err.code);
+      switch (err.code) {
+        case 'auth/email-already-in-use':
+          alert('The email address is already in use');
+          break;
+        case 'auth/invalid-email':
+          alert('The email address is not valid.');
+          break;
+        case 'auth/operation-not-allowed':
+          alert('Operation not allowed.');
+          break;
+        case 'auth/weak-password':
+          alert('The password is too weak.');
+          break;
+      }
     }
   };
 
@@ -30,43 +44,13 @@ const Register = () => {
       <h2>Singup</h2>
       <Form>
         <Label htmlFor="nickname">별칭</Label>
-        <Input
-          type="text"
-          required
-          value={nickname}
-          id="nickname"
-          onChange={e => setNickname(e.target.value)}
-          maxLength={10}
-          minLength={2}
-        />
+        <Input type="text" required value={nickname} id="nickname" onChange={e => setNickname(e.target.value)} maxLength={10} minLength={2} />
         <Label htmlFor="email">이메일</Label>
-        <Input
-          type="email"
-          required
-          value={email}
-          id="email"
-          onChange={e => setEmail(e.target.value)}
-        />
+        <Input type="email" required value={email} id="email" onChange={e => setEmail(e.target.value)} />
         <Label htmlFor="password">비밀번호</Label>
-        <Input
-          type="password"
-          value={password}
-          id="password"
-          onChange={e => setPassword(e.target.value)}
-          required
-          minLength={8}
-          maxLength={16}
-        />
+        <Input type="password" value={password} id="password" onChange={e => setPassword(e.target.value)} required minLength={8} maxLength={16} />
         <Label htmlFor="pwConfirm">비밀번호 확인</Label>
-        <Input
-          type="password"
-          value={pwConfirm}
-          id="pwConfirm"
-          onChange={e => setPwConfirm(e.target.value)}
-          required
-          minLength={8}
-          maxLength={16}
-        />
+        <Input type="password" value={pwConfirm} id="pwConfirm" onChange={e => setPwConfirm(e.target.value)} required minLength={8} maxLength={16} />
         <ButtonContainer>
           <Button onClick={e => register(e)}>회원가입</Button>
           <Button

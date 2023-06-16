@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { Container, DeleteAllButton, Screen, Title, TitleBar } from '../styles/Todo/TodoStyle';
 import List from '../components/Todo/List';
 import Form from '../components/Todo/Form';
+import { useNavigate } from 'react-router-dom';
 
-const Todo = () => {
+const Todo = ({ userInfo }) => {
+  const navigate = useNavigate();
   const [todoData, setTodoData] = useState([]);
 
   useEffect(() => {
@@ -14,6 +16,12 @@ const Todo = () => {
   useEffect(() => {
     localStorage.setItem('fb-todo-data', JSON.stringify(todoData));
   }, [todoData]);
+
+  useEffect(() => {
+    if (!userInfo) {
+      navigate('/login');
+    }
+  }, []);
 
   const deleteAllTodo = () => {
     setTodoData([]);

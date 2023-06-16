@@ -1,7 +1,14 @@
 import React from 'react';
+import firebase from '../../firebase';
 import { Container, LinkContainer, NavLinkStyle, Screen } from '../../styles/App/HeaderStyle';
 
-const Header = () => {
+const Header = ({ userInfo, setUserInfo }) => {
+  const logout = () => {
+    firebase.auth().signOut();
+    console.log('로그아웃');
+    setUserInfo('');
+  };
+
   return (
     <Screen>
       <Container>
@@ -12,8 +19,13 @@ const Header = () => {
           <NavLinkStyle to="/todo">Todo</NavLinkStyle>
         </LinkContainer>
         <LinkContainer>
-          <NavLinkStyle to="/login">Login</NavLinkStyle>
-          <NavLinkStyle to="/register">Register</NavLinkStyle>
+          <div className="text-white">
+            {userInfo.displayName} {userInfo.email}
+          </div>
+          <NavLinkStyle onClick={userInfo ? logout : null} to={userInfo ? '/' : '/login'}>
+            {userInfo ? 'Logout' : 'Login'}
+          </NavLinkStyle>
+          <NavLinkStyle to={userInfo ? '/mypage' : '/register'}>{userInfo ? 'Mypage' : 'Register'}</NavLinkStyle>
         </LinkContainer>
       </Container>
     </Screen>
