@@ -1,6 +1,6 @@
 import tw from 'twin.macro';
 
-const Screen = tw.div`flex items-center justify-center w-screen h-screen bg-blue-300`;
+const Screen = tw.div`flex mt-5 justify-center w-full`;
 
 const Container = tw.div`w-4/5 p-6 bg-white rounded-[6px] shadow`;
 

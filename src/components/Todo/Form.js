@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Input, Submit } from '../styles/FormStyle';
+import { Container, Input, Submit } from '../../styles/Todo/FormStyle';
 
 const Form = ({ todoData, setTodoData }) => {
   const [value, setValue] = useState('');

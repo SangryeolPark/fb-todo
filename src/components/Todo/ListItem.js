@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Container, EditItem, ItemTitle, TodoInfo } from '../styles/ListItemStyle';
+import { Button, Container, EditItem, ItemTitle, TodoInfo } from '../../styles/Todo/ListItemStyle';
 
 const ListItem = ({ todo, todoData, setTodoData }) => {
   const [isEdit, setIsEdit] = useState(false);
