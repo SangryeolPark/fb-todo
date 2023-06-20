@@ -3,27 +3,24 @@ import { Container, DeleteAllButton, Screen, Title, TitleBar } from '../styles/T
 import List from '../components/Todo/List';
 import Form from '../components/Todo/Form';
 import { useNavigate } from 'react-router-dom';
+import { deleteAllTodo, getTodo } from '../axios/axios';
 
 const Todo = ({ userInfo }) => {
   const navigate = useNavigate();
   const [todoData, setTodoData] = useState([]);
 
+  // useEffect(() => {
+  //   // const data = localStorage.getItem('fb-todo-data');
+  //   // data ? setTodoData(JSON.parse(data)) : localStorage.setItem('fb-todo-data', JSON.stringify([]));
+  // }, []);
+
   useEffect(() => {
-    const data = localStorage.getItem('fb-todo-data');
-    data ? setTodoData(JSON.parse(data)) : localStorage.setItem('fb-todo-data', JSON.stringify([]));
+    // localStorage.setItem('fb-todo-data', JSON.stringify(todoData));
+    getTodo(userInfo, setTodoData, navigate);
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem('fb-todo-data', JSON.stringify(todoData));
-  }, [todoData]);
-
-  useEffect(() => {
-    if (!userInfo) {
-      navigate('/login');
-    }
-  }, []);
-
-  const deleteAllTodo = () => {
+  const handleDeleteAll = () => {
+    deleteAllTodo();
     setTodoData([]);
   };
 
@@ -32,10 +29,10 @@ const Todo = ({ userInfo }) => {
       <Container>
         <TitleBar>
           <Title>Firebase Todo List</Title>
-          <DeleteAllButton onClick={deleteAllTodo}>Delete All</DeleteAllButton>
+          <DeleteAllButton onClick={handleDeleteAll}>Delete All</DeleteAllButton>
         </TitleBar>
         <List todoData={todoData} setTodoData={setTodoData} />
-        <Form todoData={todoData} setTodoData={setTodoData} />
+        <Form todoData={todoData} setTodoData={setTodoData} userInfo={userInfo} />
       </Container>
     </Screen>
   );

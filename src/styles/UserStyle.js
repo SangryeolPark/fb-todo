@@ -5,7 +5,7 @@ const Screen = tw.div`p-6 mt-5 shadow rounded-md bg-white`;
 
 const Form = styled.form`
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   flex-wrap: wrap;
   width: 80%;
   margin: 0 auto;

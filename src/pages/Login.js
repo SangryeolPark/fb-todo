@@ -10,6 +10,9 @@ const Login = ({ setUserInfo }) => {
   const navigate = useNavigate();
   // const [email, setEmail] = useState('');
   // const [password, setPassword] = useState('');
+  const tailLayout = {
+    wrapperCol: { offset: 8, span: 16 },
+  };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
@@ -27,13 +30,14 @@ const Login = ({ setUserInfo }) => {
   const onFinish = async values => {
     // console.log('Success:', values);
     try {
-      await firebase.auth().signInWithEmailAndPassword(values.email, values.password);
-      console.log('로그인 성공');
-      const user = firebase.auth().currentUser;
+      const res = await firebase.auth().signInWithEmailAndPassword(values.email, values.password);
+      // const user = firebase.auth().currentUser;
+      const user = res.user;
+      console.log('로그인');
       setUserInfo(user);
       navigate('/');
     } catch (err) {
-      console.log(err.code);
+      // console.log(err.code);
       switch (err.code) {
         case 'auth/invalid-email':
           setModalMessage('올바른 이메일 형식이 아닙니다.');
@@ -93,19 +97,21 @@ const Login = ({ setUserInfo }) => {
 
       <Form
         name="basic"
-        labelCol={{ span: 8 }}
+        labelCol={{ span: 3 }}
         wrapperCol={{ span: 16 }}
         style={{
-          maxWidth: 600,
+          maxWidth: 1280,
+          margin: '0 auto',
         }}
         initialValues={{
-          remember: true,
+          remember: false,
         }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
         <Form.Item
+          style={{ justifyContent: 'center' }}
           label="이메일"
           name="email"
           rules={[
@@ -148,14 +154,16 @@ const Login = ({ setUserInfo }) => {
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
 
-        <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-        >
-          <Button type="primary" htmlType="submit">
-            Submit
+        <Form.Item {...tailLayout}>
+          <Button
+            type="primary"
+            htmlType="submit"
+            style={{ backgroundColor: '#1677ff', marginRight: '8px' }}
+          >
+            로그인
+          </Button>
+          <Button htmlType="button" onClick={() => navigate('/register')}>
+            회원가입
           </Button>
         </Form.Item>
       </Form>

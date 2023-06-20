@@ -1,29 +1,33 @@
 import React, { useState } from 'react';
 import { Container, Input, Submit } from '../../styles/Todo/FormStyle';
+import { addTodo, axiosInstance } from '../../axios/axios';
 
-const Form = ({ todoData, setTodoData }) => {
+const Form = ({ todoData, setTodoData, userInfo }) => {
   const [value, setValue] = useState('');
 
-  const addTodo = e => {
+  const handleAdd = e => {
+    e.preventDefault();
+
     const newTodo = {
       id: Date.now(),
       title: value,
       completed: false,
+      author: userInfo.displayName,
+      email: userInfo.email,
     };
-
-    e.preventDefault();
 
     if (value.trim() === '') {
       alert('내용을 입력하세요.');
       return;
     }
 
+    addTodo(newTodo);
     setTodoData([...todoData, newTodo]);
     setValue('');
   };
 
   return (
-    <Container onSubmit={addTodo}>
+    <Container onSubmit={handleAdd}>
       <Input
         type="text"
         name="value"
