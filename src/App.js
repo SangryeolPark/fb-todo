@@ -8,6 +8,7 @@ import Todo from './pages/Todo';
 import Register from './pages/Register';
 import Mypage from './pages/Mypage';
 import NotFound from './pages/NotFound';
+import Schedule from './pages/Schedule';
 import { Screen, Container } from './styles/App/AppStyle';
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
             path="/mypage"
             element={<Mypage userInfo={userInfo} setUserInfo={setUserInfo} />}
           />
+          <Route path="/schedule" element={<Schedule />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Container>

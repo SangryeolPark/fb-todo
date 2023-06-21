@@ -9,7 +9,7 @@ const axiosInstance = axios.create({
   },
 });
 
-const getTodo = async (userInfo, setTodoData, navigate) => {
+const getTodo = async (userInfo, setTodoData, navigate, setIsLoading) => {
   if (!userInfo) {
     navigate('/login');
   } else {
@@ -21,8 +21,10 @@ const getTodo = async (userInfo, setTodoData, navigate) => {
         return item;
       });
       setTodoData(result);
+      setIsLoading(false);
     } catch (err) {
       console.log(err);
+      setIsLoading(false);
       navigate('/about');
     }
   }

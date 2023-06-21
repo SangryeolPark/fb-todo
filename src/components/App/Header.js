@@ -17,6 +17,7 @@ const Header = ({ userInfo, setUserInfo }) => {
           <NavLinkStyle to="/home">Home</NavLinkStyle>
           <NavLinkStyle to="/about">About</NavLinkStyle>
           <NavLinkStyle to="/todo">Todo</NavLinkStyle>
+          <NavLinkStyle to="/schedule">Schedule</NavLinkStyle>
         </LinkContainer>
         <LinkContainer>
           <div className="text-white">
@@ -25,7 +26,9 @@ const Header = ({ userInfo, setUserInfo }) => {
           <NavLinkStyle onClick={userInfo ? logout : null} to={userInfo ? '/' : '/login'}>
             {userInfo ? 'Logout' : 'Login'}
           </NavLinkStyle>
-          <NavLinkStyle to={userInfo ? '/mypage' : '/register'}>{userInfo ? 'Mypage' : 'Register'}</NavLinkStyle>
+          <NavLinkStyle to={userInfo ? '/mypage' : '/register'}>
+            {userInfo ? 'Mypage' : 'Register'}
+          </NavLinkStyle>
         </LinkContainer>
       </Container>
     </Screen>
